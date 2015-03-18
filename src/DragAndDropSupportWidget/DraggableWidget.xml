@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<widget id="DragAndDropSupportWidget.widget.DraggableWidget" needsEntityContext="true" xmlns="http://www.mendix.com/widget/1.0/">
+  <name>DraggableWidget</name>
+  <description>Draggable widget.</description>
+
+  <icon>
+iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAi0lEQVRYw+2WwQ7AIAhDreH/f7k7mRijk2AIZoOTh1UfWHAgyRIYtQRHAiSAtAUA0watiSx6khdVYMxoF6uMNfpe+00TAlB7wrUCGggXgN4HOwg5zWD8ZqYBsDTnfW2obamW6TiIZoPpbZ/qbb7dXHC9As1QkqiD7zWh9VW06sMrgPwrToAESIDfAzwsEC9SZeBQXwAAAABJRU5ErkJggg==
+</icon>
+
+  <properties>
+        <property key="draggableClass" type="string" required="true" defaultValue="Draggable">
+            <caption>Draggable class</caption>
+            <category>Drag</category>
+            <description>The CSS class to be put on the element to make it draggable.</description>
+        </property>
+        <property key="dragContainment" type="string" required="false" defaultValue="">
+            <caption>Drag containment CSS selector</caption>
+            <category>Drag</category>
+            <description>Optional, restrict dragging within this container. This is a CSS selector, not a class</description>
+        </property>
+        <property key="activeClass" type="string" required="true" defaultValue="DragActive">
+            <caption>Drag active class</caption>
+            <category>Drag</category>
+            <description>The CSS class to be put on the element while it is being dragged.</description>
+        </property>
+	</properties>
+</widget>
+

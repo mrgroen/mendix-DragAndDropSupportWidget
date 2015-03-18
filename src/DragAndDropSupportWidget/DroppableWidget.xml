@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<widget id="DragAndDropSupportWidget.widget.DroppableWidget" needsEntityContext="true" xmlns="http://www.mendix.com/widget/1.0/">
+  <name>DroppableWidget</name>
+  <description>Droppable widget.</description>
+
+  <icon>
+iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAhElEQVRYw+2XUQrAMAhDG/H+V3ZfgzJGmRpwgn5bfA3RWpiZrcKQVRwDMADqPQAgXXRvvH4KvN0io15/EwJI+YKmQBRCmI6OQFAUyEBoVM5TDoDPXfLPOXCiv2/+zNkV8cwIYXeAd0BJZXGqB6KbnVYV7v8aMvaCngqwvxGzlA7AAJQDXHioK1AH0yA0AAAAAElFTkSuQmCC
+  </icon>
+
+  <properties>
+        <property key="dropTargetClass" type="string" required="true" defaultValue="DropTarget">
+            <caption>Target class</caption>
+            <category>Drop</category>
+            <description>The CSS class to be put on the element to make it a drop target.</description>
+        </property>
+        <property key="acceptClass" type="string" required="false" defaultValue="">
+            <caption>Accept class</caption>
+            <category>Drop</category>
+            <description>Optional, draggable must have this CSS class to be acceptable.</description>
+        </property>
+        <property key="onDropReference" type="entity" isPath="yes" pathType="reference" allowNonPersistableEntities="true" required="true">
+            <caption>Drop entity reference</caption>
+            <category>Drop</category>
+            <description>The reference to the dropped entity. The widget will set this reference when an item is dropped.</description>
+        </property>
+        <property key="onDropMicroflow" type="microflow" required="true" >
+            <caption>Microflow</caption>
+            <category>Drop</category>
+            <description>The microflow to execute when an item is dropped.</description>
+            <returnType type="Void"></returnType>
+        </property>
+	</properties>
+</widget>
+
