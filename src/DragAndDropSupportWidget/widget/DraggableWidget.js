@@ -43,7 +43,7 @@ require({
 
         // dijit._WidgetBase.postCreate is called after constructing the widget. Implement to do extra setup work.
         postCreate: function () {
-            console.log(this.id + '.postCreate');
+//            console.log(this.id + '.postCreate');
             
 //            this.domNode.appendChild(dom.create('span', { 'class': 'DraggableWidget-message' }, this.messageString));
 
@@ -52,7 +52,7 @@ require({
 
         // mxui.widget._WidgetBase.update is called when context is changed or initialized. Implement to re-render and / or fetch data.
         update: function (obj, callback) {
-            console.log(this.id + '.update');
+//            console.log(this.id + '.update');
 
             this._contextObj = obj;
             this._resetSubscriptions();
@@ -79,14 +79,25 @@ require({
         // mxui.widget._WidgetBase.uninitialize is called when the widget is destroyed. Implement to do special tear-down work.
         uninitialize: function () {
             // Clean up listeners, helper objects, etc. There is no need to remove listeners added with this.connect / this.subscribe / this.own.
-            console.log(this.id + '.uninitialize');
         },
 
         _setupEvents: function () {
+            var args = {};
+            if (this.dragContainment) {
+                args.containment = this.dragContainment;
+            }
+            args.revert = "invalid";
+            if (this.makeClone) {
+                args.helper = "clone";
+            }
+            $(this.domNode.parentElement).addClass(this.draggableClass).draggable(args);
         },
 
         _updateRendering: function () {
-            console.log(this.id + '._updateRendering');
+            $(this.domNode.parentElement).attr({
+                "data-object-type" : this._contextObj.getEntity(),
+                "data-object-guid" : this._contextObj.getGuid()
+            });
         },
 
         _resetSubscriptions: function () {

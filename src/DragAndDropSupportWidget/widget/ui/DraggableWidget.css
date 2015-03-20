@@ -1,0 +1,15 @@
+.Draggable.ui-draggable.ui-draggable-handle,
+.Draggable.ui-draggable.ui-draggable-handle label {
+    cursor: move;
+}
+
+.Draggable.ui-draggable.ui-draggable-handle.ui-draggable-dragging {
+    box-shadow: 0px 1px 3px #444;
+    background-color: white;
+    z-index:1;
+    cursor: move;
+}
+
+.Draggable.ui-draggable.ui-draggable-handle.ui-draggable-dragging label {
+    cursor: move;
+}

@@ -15,13 +15,13 @@ public class Microflows
 {
 	// These are the microflows for the TestDragAndDrop module
 
-	public static void iVK_Header_Cancel(IContext context, testdraganddrop.proxies.HeaderDetailDnD _headerDetailDnD)
+	public static void iVK_Detail_Reordered(IContext context, testdraganddrop.proxies.DetailDnD _detailDnD)
 	{
 		try
 		{
 			Map<String, Object> params = new HashMap<String, Object>();
-			params.put("headerDetailDnD", _headerDetailDnD == null ? null : _headerDetailDnD.getMendixObject());
-			Core.execute(context, "TestDragAndDrop.IVK_Header_Cancel", params);
+			params.put("detailDnD", _detailDnD == null ? null : _detailDnD.getMendixObject());
+			Core.execute(context, "TestDragAndDrop.IVK_Detail_Reordered", params);
 		}
 		catch (CoreException e)
 		{
@@ -29,13 +29,13 @@ public class Microflows
 		}
 	}
 
-	public static void iVK_Header_Save(IContext context, testdraganddrop.proxies.HeaderDetailDnD _headerDetailDnD)
+	public static void iVK_Item_DroppedOnDetail(IContext context, testdraganddrop.proxies.DetailDnD _detailDnD)
 	{
 		try
 		{
 			Map<String, Object> params = new HashMap<String, Object>();
-			params.put("headerDetailDnD", _headerDetailDnD == null ? null : _headerDetailDnD.getMendixObject());
-			Core.execute(context, "TestDragAndDrop.IVK_Header_Save", params);
+			params.put("detailDnD", _detailDnD == null ? null : _detailDnD.getMendixObject());
+			Core.execute(context, "TestDragAndDrop.IVK_Item_DroppedOnDetail", params);
 		}
 		catch (CoreException e)
 		{
@@ -43,13 +43,41 @@ public class Microflows
 		}
 	}
 
-	public static void iVK_Header_StartEdit(IContext context, testdraganddrop.proxies.Header _header)
+	public static void iVK_Item_DroppedOnHeader(IContext context, testdraganddrop.proxies.DetailDnD _detailDnD)
+	{
+		try
+		{
+			Map<String, Object> params = new HashMap<String, Object>();
+			params.put("detailDnD", _detailDnD == null ? null : _detailDnD.getMendixObject());
+			Core.execute(context, "TestDragAndDrop.IVK_Item_DroppedOnHeader", params);
+		}
+		catch (CoreException e)
+		{
+			throw new MendixRuntimeException(e);
+		}
+	}
+
+	public static void iVK_Item_Reordered(IContext context, testdraganddrop.proxies.ItemDnD _itemDnD)
+	{
+		try
+		{
+			Map<String, Object> params = new HashMap<String, Object>();
+			params.put("itemDnD", _itemDnD == null ? null : _itemDnD.getMendixObject());
+			Core.execute(context, "TestDragAndDrop.IVK_Item_Reordered", params);
+		}
+		catch (CoreException e)
+		{
+			throw new MendixRuntimeException(e);
+		}
+	}
+
+	public static void sUB_Detail_Resequence(IContext context, testdraganddrop.proxies.Header _header)
 	{
 		try
 		{
 			Map<String, Object> params = new HashMap<String, Object>();
 			params.put("header", _header == null ? null : _header.getMendixObject());
-			Core.execute(context, "TestDragAndDrop.IVK_Header_StartEdit", params);
+			Core.execute(context, "TestDragAndDrop.SUB_Detail_Resequence", params);
 		}
 		catch (CoreException e)
 		{
@@ -57,26 +85,12 @@ public class Microflows
 		}
 	}
 
-	public static void iVK_Header_StartNew(IContext context)
+	public static void sUB_Item_Resequence(IContext context)
 	{
 		try
 		{
 			Map<String, Object> params = new HashMap<String, Object>();
-			Core.execute(context, "TestDragAndDrop.IVK_Header_StartNew", params);
-		}
-		catch (CoreException e)
-		{
-			throw new MendixRuntimeException(e);
-		}
-	}
-
-	public static void jS_NewItemDropped(IContext context, testdraganddrop.proxies.HeaderDetailDnD _headerDetailDnD)
-	{
-		try
-		{
-			Map<String, Object> params = new HashMap<String, Object>();
-			params.put("HeaderDetailDnD", _headerDetailDnD == null ? null : _headerDetailDnD.getMendixObject());
-			Core.execute(context, "TestDragAndDrop.JS_NewItemDropped", params);
+			Core.execute(context, "TestDragAndDrop.SUB_Item_Resequence", params);
 		}
 		catch (CoreException e)
 		{

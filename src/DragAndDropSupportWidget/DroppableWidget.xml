@@ -11,23 +11,55 @@ iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAhElEQVRYw+2XUQrAMAhDG/H+V3ZfgzJG
         <property key="dropTargetClass" type="string" required="true" defaultValue="DropTarget">
             <caption>Target class</caption>
             <category>Drop</category>
-            <description>The CSS class to be put on the element to make it a drop target.</description>
+            <description>The CSS class(ses) to be put on the element. Separate classes using a space</description>
         </property>
-        <property key="acceptClass" type="string" required="false" defaultValue="">
-            <caption>Accept class</caption>
+        <property key="dropTargetHoverClass" type="string" required="true" defaultValue="DropTargetHover">
+            <caption>Target hover class</caption>
             <category>Drop</category>
-            <description>Optional, draggable must have this CSS class to be acceptable.</description>
+            <description>The CSS class(ses) to be put on the element when an acceptable draggable is hovered over this widget. Separate classes using a space</description>
         </property>
-        <property key="onDropReference" type="entity" isPath="yes" pathType="reference" allowNonPersistableEntities="true" required="true">
-            <caption>Drop entity reference</caption>
+        <property key="dropTargetSelector" type="string" required="false">
+            <caption>Target CSS selector</caption>
             <category>Drop</category>
-            <description>The reference to the dropped entity. The widget will set this reference when an item is dropped.</description>
+            <description>Optional, the selector to find the element to turn into a drop target. Leave empty to use the parent of the widget. This is a CSS selector, not a class.</description>
         </property>
-        <property key="onDropMicroflow" type="microflow" required="true" >
-            <caption>Microflow</caption>
+        <property key="acceptSelector" type="string" required="false" defaultValue="">
+            <caption>Accept CSS selector</caption>
             <category>Drop</category>
-            <description>The microflow to execute when an item is dropped.</description>
-            <returnType type="Void"></returnType>
+            <description>Optional, a selector indicating which draggable elements are accepted. Leave empty to accept any draggable. This is a CSS selector, not a class.</description>
+        </property>
+        <property key="dropEntityList" type="object" isList="true" required="true">
+            <caption>Droppable entities</caption>
+            <category>Drop</category>
+            <description>Define the entities that may be dropped here. If you define an entity multiple times, each entry will be processed.</description>
+            <properties>
+                <property key="draggedEntity" type="entity" allowNonPersistableEntities="true" required="true">
+                    <caption>Dragged entity</caption>
+                    <category>Drop</category>
+                    <description>The dragged entity.</description>
+                </property>
+                <property key="onDropEntity" type="entity" allowNonPersistableEntities="true" required="true">
+                    <caption>On drop entity</caption>
+                    <category>Drop</category>
+                    <description>The entity used for the drop, the widget creates an object of this entity at each drop. It is recommended to use a non-persistent entity.</description>
+                </property>
+                <property key="draggedReference" type="entity" isPath="yes" entityProperty="onDropEntity" pathType="reference" allowNonPersistableEntities="true" required="true">
+                    <caption>Dragged entity reference</caption>
+                    <category>Drop</category>
+                    <description>The reference from the drop entity to the dragged entity. The widget will set this reference when an item is dropped.</description>
+                </property>
+                <property key="dropTargetReference" type="entity" isPath="yes" entityProperty="onDropEntity" pathType="reference" allowNonPersistableEntities="true" required="true">
+                    <caption>Drop target reference</caption>
+                    <category>Drop</category>
+                    <description>The reference from the drop entity to the drop target entity. The widget will set this reference to the context object when an item is dropped.</description>
+                </property>
+                <property key="onDropMicroflow" type="microflow" entityProperty="onDropEntity" required="true" >
+                    <caption>Microflow</caption>
+                    <category>Drop</category>
+                    <description>The microflow to execute when an item is dropped.</description>
+                    <returnType type="Void"></returnType>
+                </property>
+            </properties>
         </property>
 	</properties>
 </widget>
