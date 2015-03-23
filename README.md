@@ -1,85 +1,98 @@
-# App Store Widget Boilerplate
+mendix-PivotTableWidget
+=======================
 
-This boilerplate gives you all you need to start a new custom widget for Mendix 5.6.0 and up.
+Draggable and Droppable Widget
 
-The boilerplate contains:
+##Description
+The Draggable and Droppable widgets enable drag and drop support on Mendix pages.
 
-- Directory structure.
-- Readme.md file.
-- License.
-- Javascript source.
-- XSD for package.xml, to configure properties of the widget, visible inside the Mendix business modeler.
 
-## Contributing
 
-For more information on contributing to this repository visit [Contributing to a GitHub repository](https://world.mendix.com/display/howto50/Contributing+to+a+GitHub+repository)!
+Have a look at the screen shots or download the Drag and Drop Demo Project
 
-## Typical usage scenario
+##Typical Usage Scenario
 
-Use this template to start building a widget for Mendix 5.
-Alter this README.md file and describe what your widget does.
+- Drag item from a listview onto another page element to add them to a list or as detail to a master object.
+- Reorder items in a list.
+
+##Features And Limitations
+
+- Droppable widget calls a microflow when an item is dropped on it.
+- Microflow receives an object that contains references to the dragged item and the drop target item.
+- One droppable widget can accept different draggable objects. This is useful when new items may be dragged onto a template grid and grid items may be reordered on the same page. The demo project has an example of this.
+- Uses jQuery UI under the hood.
+- Non-persistent entities are supported and actually preferred for the drop target.
+
+##Installation
+
+Normal installation using the App Store
+
+##Dependencies
  
-## Description
+- Mendix 5.14.1 Environment
 
-The javascript inside the widget has examples of:
+##Configuration
 
-- Using CSS within a Widget.
-- Using templating.
-- Loading external library's.
-- DOM manipulation.
-- Event attaching.
-- Loading data.
-- Executing microflow and sending data.
-- Working with the context object (The object that is send by a contextview , for instance a dataview).
+###Non-persistent entities
+It is advised to use non-persistent entities as onDropEntity for this widget.
 
-### Dojo AMD module list
 
-The javascript contains a really extensive list of modules that may be used to build the widget. It is best to reduce this list to what is actually used. Plugins like jsLint for Notepad++ will show unused objects. **Be sure to keep the module name array and the parameter list of the anonymous function below the module list in sync!**
+##Properties
+###Draggable widget
 
-The following modules are necessary for all widgets:
+####Draggable class
+This class is added to the direct parent of the draggable widget. The default enables some default styling like the drop shadow under the item being dragged and the cursor icon. It is possible to use your own. You may also specify multiple classes by separating then using a space. 
 
-- dojo/_base/declare
-- mxui/widget/_WidgetBase
-- dijit/_Widget
+This class can also be used on the droppable widget to allow only items having the specified class.
 
-If your widget does not use an HTML template:
+####Drag containment CSS selector
+When you specify a CSS selector here, the items may only be dragged within that element.
 
-- Remove dijit/_TemplatedMixin from the module list
-- Remove _Templated from the parameter list of the anonymous function below the module list
-- Remove _Templated from the parameter list of the declare call
-- Remove the templates folder
+An example:
 
-If your widget does not need jQuery:
+To limit dragging to the listview that contains the items, give the listview a meaningful name and then specify: .mx-name-<name of the listview>
 
-- Remove WidgetName/widget/lib/jquery from the module list
-- Remove _jQuery from the parameter list of the anonymous function below the module list
-- Remove _jQuery from the parameter list of the declare call
-- Remove jquery.js from src\WidgetName\widget\lib\ Or remove the lib folder if you don't include external libraries in the widget.
+####Make clone
+Make a clone or drag the item itself. In general:
 
-## Migrating a widget to Dojo AMD
+- When dragging an item from a list of available items to another object, make a clone.
+- When dragging to reorder items, do not make a clone.
 
-A widget that uses Dojo AMD may not refer to functions like *dojo.query* etc. All necessary modules must be declared on the module list at the top of the source.
+###Droppable widget
 
-Replacing all 'old' Dojo calls in an existing source can be a bit of a pain.
+####Target class
+This class is added to the drop target. Specify multiple classes by separating then using a space.
 
-Here is a list of commonly used functions and their AMD counterpart:
+####Target hover class
+This class is added to the drop target when an acceptable item is dragged over the drop target. The default will draw a green border.
 
-Old | New
----------- |---------- 
-mxui.dom              | domMx
-dojo.byId             | dom.byId
-dojo.query            | domQuery
-dojo.forEach          | dojoArray.forEach
-dojo.hitch            | lang.hitch
-dojo.addClass         | domClass.add
-dojo.removeClass      | domClass.remove
-dojo.hasClass         | domClass.contains
-dojo.replaceClass     | domClass.replace
-dojo.empty            | domConstruct.empty
-dojo.place            | domConstruct.place 
-dojo.on               | on
-dojo.window           | win
-  
-Do not use domQuery.query! Just domQuery
+####Target CSS selector
+Optional, the selector to find the element to turn into a drop target. Leave empty to use the parent of the widget. This is a CSS selector, not a class.
 
-The referenced modules are in the module list of the boilerplate javascript
+An example:
+
+To select the toolbar of a  template grid as drop target, give the template grid a meaningful name and then specify:
+
+.mx-name-<name of the template grid> .mx-grid-toolbar
+
+This allows items to be dropped on an empty template grid.
+
+####Accept CSS selector
+Optional, a selector indicating which draggable elements are accepted. Leave empty to accept any draggable. This is a CSS selector, not a class. For example:
+
+- Set this property to .MyDraggableObject
+- Add class MyDraggableObject to the Draggable class property of the draggable widget. (Leave the default, there must be two classes separated by a space.)
+
+####Droppable entities
+Define the entities that may be dropped here. If you define an entity multiple times, each entry will be processed. At least one item must be created here. Multiple items can be created here, this is useful when new items may be dragged onto a template grid and grid items may be reordered too.
+
+Specify for each item:
+
+- Dragged entity: The context entity of the draggable widget. This is used to select the matching item when multiple items are created.
+- On drop entity: The entity used for the drop, the widget creates an object of this entity at each drop. It is recommended to use a non-persistent entity.
+- Dragged entity reference: The reference from the drop entity to the dragged entity. The widget will set this reference when an item is dropped.
+- Drop target reference: The reference from the drop entity to the drop target entity. The widget will set this reference to the context object when an item is dropped.
+- Microflow: The microflow to execute when an item is dropped. It has one parameter: the on drop entity object.
+ 
+ 
+ 

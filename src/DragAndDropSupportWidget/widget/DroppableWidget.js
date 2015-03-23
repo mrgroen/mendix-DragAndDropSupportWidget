@@ -19,7 +19,10 @@
 
 // Required module list. Remove unnecessary modules, you can always get them back from the boilerplate.
 require({
-    packages: [{ name: 'jquery', location: '../../widgets/DragAndDropSupportWidget/lib', main: 'jquery-1.11.2.min' }]
+    packages: [
+        { name: 'jquery', location: '../../widgets/DragAndDropSupportWidget/lib', main: 'jquery-1.11.2.min' },
+        { name: 'jqueryui', location: '../../widgets/DragAndDropSupportWidget/lib', main: 'jquery-ui.min' }
+    ]
 }, [
     'dojo/_base/declare', 'mxui/widget/_WidgetBase', 
     'mxui/dom', 'dojo/_base/lang',

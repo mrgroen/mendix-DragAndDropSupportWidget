@@ -25,9 +25,9 @@ require({
     ]
 }, [
     'dojo/_base/declare', 'mxui/widget/_WidgetBase', 
-    'mxui/dom', 'dojo/dom', 
+    'mxui/dom', 
     'jquery', 'jqueryui'
-], function (declare, _WidgetBase, dom, dojoDom, $) {
+], function (declare, _WidgetBase, dom, $) {
     'use strict';
     
     // Declare widget's prototype.
@@ -36,6 +36,8 @@ require({
         // Parameters configured in the Modeler.
 
         // Internal variables. Non-primitives created in the prototype are shared between all widget instances.
+        _handle: null,
+        _contextObj: null,
 
         // dojo.declare.constructor is called to construct the widget instance. Implement to initialize non-primitive properties.
         constructor: function () {
