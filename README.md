@@ -4,11 +4,9 @@ mendix-PivotTableWidget
 Draggable and Droppable Widget
 
 ##Description
-The Draggable and Droppable widgets enable drag and drop support on Mendix pages.
+The Draggable and Droppable widgets enable drag and drop support on Mendix pages, also on touch devices.
 
-
-
-Have a look at the screen shots or download the Drag and Drop Demo Project
+Have a look at the screen shots or try the test project in the GitHub repository.
 
 ##Typical Usage Scenario
 
@@ -20,7 +18,7 @@ Have a look at the screen shots or download the Drag and Drop Demo Project
 - Droppable widget calls a microflow when an item is dropped on it.
 - Microflow receives an object that contains references to the dragged item and the drop target item.
 - One droppable widget can accept different draggable objects. This is useful when new items may be dragged onto a template grid and grid items may be reordered on the same page. The demo project has an example of this.
-- Uses jQuery UI under the hood.
+- Uses jQuery UI under the hood, with a plugin for touch (mobile device) support.
 - Non-persistent entities are supported and actually preferred for the drop target.
 
 ##Installation
@@ -50,7 +48,7 @@ When you specify a CSS selector here, the items may only be dragged within that 
 
 An example:
 
-To limit dragging to the listview that contains the items, give the listview a meaningful name and then specify: .mx-name-<name of the listview>
+To limit dragging to the listview that contains the items, give the listview a meaningful name and then specify: .mx-name-*nameOfTheListview*
 
 ####Make clone
 Make a clone or drag the item itself. In general:
@@ -73,7 +71,7 @@ An example:
 
 To select the toolbar of a  template grid as drop target, give the template grid a meaningful name and then specify:
 
-.mx-name-<name of the template grid> .mx-grid-toolbar
+.mx-name-*nameOfTheTemplateGrid* .mx-grid-toolbar
 
 This allows items to be dropped on an empty template grid.
 
