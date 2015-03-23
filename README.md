@@ -1,4 +1,4 @@
-mendix-PivotTableWidget
+Drag and drop support
 =======================
 
 Draggable and Droppable Widget
