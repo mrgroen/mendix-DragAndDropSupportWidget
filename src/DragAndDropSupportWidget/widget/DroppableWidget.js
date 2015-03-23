@@ -21,12 +21,13 @@
 require({
     packages: [
         { name: 'jquery', location: '../../widgets/DragAndDropSupportWidget/lib', main: 'jquery-1.11.2.min' },
-        { name: 'jqueryui', location: '../../widgets/DragAndDropSupportWidget/lib', main: 'jquery-ui.min' }
+        { name: 'jqueryui', location: '../../widgets/DragAndDropSupportWidget/lib', main: 'jquery-ui.min' },
+        { name: 'touchpunch', location: '../../widgets/DragAndDropSupportWidget/lib', main: 'jquery.ui.touch-punch.min' }
     ]
 }, [
     'dojo/_base/declare', 'mxui/widget/_WidgetBase', 
     'mxui/dom', 'dojo/_base/lang',
-    'jquery', 'jqueryui'
+    'jquery', 'jqueryui', 'touchpunch'
 ], function (declare, _WidgetBase, dom, lang, $) {
     'use strict';
     
