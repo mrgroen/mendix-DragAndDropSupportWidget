@@ -18,7 +18,7 @@ Have a look at the screen shots or try the test project in the GitHub repository
 - Droppable widget calls a microflow when an item is dropped on it.
 - Microflow receives an object that contains references to the dragged item and the drop target item.
 - One droppable widget can accept different draggable objects. This is useful when new items may be dragged onto a template grid and grid items may be reordered on the same page. The demo project has an example of this.
-- Uses jQuery UI under the hood, with a plugin for touch (mobile device) support.
+- Uses jQuery UI under the hood, touch support by [http://touchpunch.furf.com/](http://touchpunch.furf.com/).
 - Non-persistent entities are supported and actually preferred for the drop target.
 
 ##Installation
