@@ -20,8 +20,8 @@
 // Required module list. Remove unnecessary modules, you can always get them back from the boilerplate.
 require({
     packages: [
-        { name: 'jquery', location: '../../widgets/DragAndDropSupportWidget/lib', main: 'jquery-1.11.2.min' },
-        { name: 'jqueryui', location: '../../widgets/DragAndDropSupportWidget/lib', main: 'jquery-ui.min' },
+        { name: 'jquery', location: '../../widgets/DragAndDropSupportWidget/lib', main: 'jquery-1.10.2.min' },
+        { name: 'jqueryui', location: '../../widgets/DragAndDropSupportWidget/lib', main: 'jquery-ui-1.10.4.custom.min' },
         { name: 'touchpunch', location: '../../widgets/DragAndDropSupportWidget/lib', main: 'jquery.ui.touch-punch.min' }
     ]
 }, [
@@ -39,8 +39,7 @@ require({
         // Internal variables. Non-primitives created in the prototype are shared between all widget instances.
         _handle: null,
         _contextObj: null,
-        _droppedObjectType: null,
-        _droppedObjectGuid: null,
+        _dropData: null,
         _dropEntityItem: null,
 
         // dojo.declare.constructor is called to construct the widget instance. Implement to initialize non-primitive properties.
@@ -110,20 +109,18 @@ require({
         },
         
         _drop: function (event, ui) {
-            var index;
+            var droppedObjectType,
+                droppedObjectGuid,
+                index;
             
-            if (ui.draggable.draggable("option", "helper") === "original") {
-                // When the original item is dragged, it must be returned to its original position.
-                // Mendix does not recreate widgets when refreshing lists but just updates existing widgets where possible and creates new ones when necessary.
-                ui.draggable.css({top: "0px", left: "0px"});
-            }
+            this._dropData = ui;
                         
-            this._droppedObjectType = ui.draggable.attr("data-object-type");
-            this._droppedObjectGuid = ui.draggable.attr("data-object-guid");
+            droppedObjectType = ui.draggable.attr("data-object-type");
+            droppedObjectGuid = ui.draggable.attr("data-object-guid");
             for (index = 0; index < this.dropEntityList.length; index++) {
-                if (this._droppedObjectType === this.dropEntityList[index].draggedEntity) {
+                if (droppedObjectType === this.dropEntityList[index].draggedEntity) {
                     this._dropEntityItem = this.dropEntityList[index];
-                    console.log("Dropped " + this._droppedObjectType + ":" + this._droppedObjectGuid + " onto " + this._contextObj.getEntity() + ":" + this._contextObj.getGuid());
+                    console.log("Dropped " + droppedObjectType + ":" + droppedObjectGuid + " onto " + this._contextObj.getEntity() + ":" + this._contextObj.getGuid());
                     mx.data.create({
                         entity   : this._dropEntityItem.onDropEntity,
                         callback : lang.hitch(this, this.onDropObjectCreated),
@@ -144,11 +141,13 @@ require({
 
             // console.log("onDropObjectCreated");
             var draggedReference,
+                droppedObjectGuid,
                 dropTargetReference;
 
             draggedReference = this._dropEntityItem.draggedReference.substr(0, this._dropEntityItem.draggedReference.indexOf('/'));
             dropTargetReference = this._dropEntityItem.dropTargetReference.substr(0, this._dropEntityItem.dropTargetReference.indexOf('/'));
-            mendixObject.addReference(draggedReference, this._droppedObjectGuid);
+            droppedObjectGuid = this._dropData.draggable.attr("data-object-guid");
+            mendixObject.addReference(draggedReference, droppedObjectGuid);
             mendixObject.addReference(dropTargetReference, this._contextObj.getGuid());
             // console.log("Commit object");
             this.onDropMendixObject = mendixObject;
@@ -173,11 +172,26 @@ require({
                     actionname  : this._dropEntityItem.onDropMicroflow,
                     guids : [this.onDropMendixObject.getGuid()]
                 },
+                callback     : lang.hitch(this, this.onDropMicroflowCallback),
                 error        : lang.hitch(this, this.onDropMicroflowError),
                 onValidation : lang.hitch(this, this.onDropMicroflowError)
             });
+            if (this._dropData.draggable.draggable("option", "helper") === "original") {
+                // When the original item is dragged, it must be returned to its original position.
+                // Mendix does not recreate widgets when refreshing lists but just updates existing widgets where possible and creates new ones when necessary.
+                this._dropData.draggable.css({top: "0px", left: "0px"});
+            }
 
         },
+
+        /**
+         * Call to onDrop microflow completed
+         *
+         */
+        onDropMicroflowCallback : function () {
+            this._moveDraggedNodeBack();
+
+        },       
 
         /**
          * Called after creation of onDropEntity failed
@@ -210,11 +224,19 @@ require({
          */
         onDropMicroflowError : function (err) {
 
+            this._moveDraggedNodeBack();
             console.dir(err);
             console.log("Call to microflow " + this.onDropMicroflow + " ended with an error");
 
         },       
         
+        _moveDraggedNodeBack: function () {
+            if (this._dropData.draggable.draggable("option", "helper") === "original") {
+                // When the original item is dragged, it must be returned to its original position.
+                // Mendix does not recreate widgets when refreshing lists but just updates existing widgets where possible and creates new ones when necessary.
+                this._dropData.draggable.css({top: "0px", left: "0px"});
+            }
+        },
         _updateRendering: function () {
         },
 
