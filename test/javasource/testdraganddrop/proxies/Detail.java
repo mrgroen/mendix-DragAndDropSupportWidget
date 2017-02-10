@@ -120,7 +120,7 @@ public class Detail
 	/**
 	 * @return value of SequenceNumber
 	 */
-	public final Integer getSequenceNumber()
+	public final java.lang.Integer getSequenceNumber()
 	{
 		return getSequenceNumber(getContext());
 	}
@@ -129,16 +129,16 @@ public class Detail
 	 * @param context
 	 * @return value of SequenceNumber
 	 */
-	public final Integer getSequenceNumber(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.Integer getSequenceNumber(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (Integer) getMendixObject().getValue(context, MemberNames.SequenceNumber.toString());
+		return (java.lang.Integer) getMendixObject().getValue(context, MemberNames.SequenceNumber.toString());
 	}
 
 	/**
 	 * Set value of SequenceNumber
 	 * @param sequencenumber
 	 */
-	public final void setSequenceNumber(Integer sequencenumber)
+	public final void setSequenceNumber(java.lang.Integer sequencenumber)
 	{
 		setSequenceNumber(getContext(), sequencenumber);
 	}
@@ -148,7 +148,7 @@ public class Detail
 	 * @param context
 	 * @param sequencenumber
 	 */
-	public final void setSequenceNumber(com.mendix.systemwideinterfaces.core.IContext context, Integer sequencenumber)
+	public final void setSequenceNumber(com.mendix.systemwideinterfaces.core.IContext context, java.lang.Integer sequencenumber)
 	{
 		getMendixObject().setValue(context, MemberNames.SequenceNumber.toString(), sequencenumber);
 	}

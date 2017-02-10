@@ -119,7 +119,7 @@ public class Item
 	/**
 	 * @return value of SequenceNumber
 	 */
-	public final Integer getSequenceNumber()
+	public final java.lang.Integer getSequenceNumber()
 	{
 		return getSequenceNumber(getContext());
 	}
@@ -128,16 +128,16 @@ public class Item
 	 * @param context
 	 * @return value of SequenceNumber
 	 */
-	public final Integer getSequenceNumber(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.Integer getSequenceNumber(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (Integer) getMendixObject().getValue(context, MemberNames.SequenceNumber.toString());
+		return (java.lang.Integer) getMendixObject().getValue(context, MemberNames.SequenceNumber.toString());
 	}
 
 	/**
 	 * Set value of SequenceNumber
 	 * @param sequencenumber
 	 */
-	public final void setSequenceNumber(Integer sequencenumber)
+	public final void setSequenceNumber(java.lang.Integer sequencenumber)
 	{
 		setSequenceNumber(getContext(), sequencenumber);
 	}
@@ -147,7 +147,7 @@ public class Item
 	 * @param context
 	 * @param sequencenumber
 	 */
-	public final void setSequenceNumber(com.mendix.systemwideinterfaces.core.IContext context, Integer sequencenumber)
+	public final void setSequenceNumber(com.mendix.systemwideinterfaces.core.IContext context, java.lang.Integer sequencenumber)
 	{
 		getMendixObject().setValue(context, MemberNames.SequenceNumber.toString(), sequencenumber);
 	}
@@ -155,7 +155,7 @@ public class Item
 	/**
 	 * @return value of Name
 	 */
-	public final String getName()
+	public final java.lang.String getName()
 	{
 		return getName(getContext());
 	}
@@ -164,16 +164,16 @@ public class Item
 	 * @param context
 	 * @return value of Name
 	 */
-	public final String getName(com.mendix.systemwideinterfaces.core.IContext context)
+	public final java.lang.String getName(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		return (String) getMendixObject().getValue(context, MemberNames.Name.toString());
+		return (java.lang.String) getMendixObject().getValue(context, MemberNames.Name.toString());
 	}
 
 	/**
 	 * Set value of Name
 	 * @param name
 	 */
-	public final void setName(String name)
+	public final void setName(java.lang.String name)
 	{
 		setName(getContext(), name);
 	}
@@ -183,7 +183,7 @@ public class Item
 	 * @param context
 	 * @param name
 	 */
-	public final void setName(com.mendix.systemwideinterfaces.core.IContext context, String name)
+	public final void setName(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String name)
 	{
 		getMendixObject().setValue(context, MemberNames.Name.toString(), name);
 	}
