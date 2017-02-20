@@ -8,8 +8,8 @@
     @file      : DroppableWidget.js
     @version   : 1.0
     @author    : Marcel Groeneweg
-    @date      : Mon, 09 Mar 2015 08:17:04 GMT
-    @copyright : Synobsys
+    @date      : 20-02-2017
+    @copyright : ITvisors
     @license   : Apache 2
 
     Documentation
