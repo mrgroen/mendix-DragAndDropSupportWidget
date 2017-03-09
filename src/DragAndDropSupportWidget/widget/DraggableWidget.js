@@ -18,19 +18,13 @@
 */
 
 // Required module list. Remove unnecessary modules, you can always get them back from the boilerplate.
-require({
-    packages: [
-        { name: 'jquery', location: '../../widgets/DragAndDropSupportWidget/lib', main: 'jquery-1.10.2.min' },
-        { name: 'jqueryui', location: '../../widgets/DragAndDropSupportWidget/lib', main: 'jquery-ui-1.10.4.custom.min' },
-        { name: 'touchpunch', location: '../../widgets/DragAndDropSupportWidget/lib', main: 'jquery.ui.touch-punch.min' }
-    ]
-}, [
-    'dojo/_base/declare', 'mxui/widget/_WidgetBase', 
-    'mxui/dom', 
-    'jquery', 'jqueryui', 'touchpunch'
+require([
+    'dojo/_base/declare', 'mxui/widget/_WidgetBase',
+    'mxui/dom',
+    'DragAndDropSupportWidget/lib/jquery.ui.touch-punch'
 ], function (declare, _WidgetBase, dom, $) {
     'use strict';
-    
+
     // Declare widget's prototype.
     return declare('DragAndDropSupportWidget.widget.DraggableWidget', [ _WidgetBase ], {
 
@@ -47,7 +41,7 @@ require({
         // dijit._WidgetBase.postCreate is called after constructing the widget. Implement to do extra setup work.
         postCreate: function () {
 //            console.log(this.id + '.postCreate');
-            
+
 //            this.domNode.appendChild(dom.create('span', { 'class': 'DraggableWidget-message' }, this.messageString));
 
             this._setupEvents();

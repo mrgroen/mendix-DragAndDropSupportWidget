@@ -18,16 +18,10 @@
 */
 
 // Required module list. Remove unnecessary modules, you can always get them back from the boilerplate.
-require({
-    packages: [
-        { name: 'jquery', location: '../../widgets/DragAndDropSupportWidget/lib', main: 'jquery-1.10.2.min' },
-        { name: 'jqueryui', location: '../../widgets/DragAndDropSupportWidget/lib', main: 'jquery-ui-1.10.4.custom.min' },
-        { name: 'touchpunch', location: '../../widgets/DragAndDropSupportWidget/lib', main: 'jquery.ui.touch-punch.min' }
-    ]
-}, [
+require( [
     'dojo/_base/declare', 'mxui/widget/_WidgetBase', 
     'mxui/dom', 'dojo/_base/lang',
-    'jquery', 'jqueryui', 'touchpunch'
+    'DragAndDropSupportWidget/lib/jquery.ui.touch-punch'
 ], function (declare, _WidgetBase, dom, lang, $) {
     'use strict';
     
