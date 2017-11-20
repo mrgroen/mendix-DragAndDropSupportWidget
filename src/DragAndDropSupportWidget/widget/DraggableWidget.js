@@ -34,10 +34,6 @@ require([
         _handle: null,
         _contextObj: null,
 
-        // dojo.declare.constructor is called to construct the widget instance. Implement to initialize non-primitive properties.
-        constructor: function () {
-        },
-
         // dijit._WidgetBase.postCreate is called after constructing the widget. Implement to do extra setup work.
         postCreate: function () {
 //            console.log(this.id + '.postCreate');
@@ -56,26 +52,6 @@ require([
             this._updateRendering();
 
             callback();
-        },
-
-        // mxui.widget._WidgetBase.enable is called when the widget should enable editing. Implement to enable editing if widget is input widget.
-        enable: function () {
-
-        },
-
-        // mxui.widget._WidgetBase.enable is called when the widget should disable editing. Implement to disable editing if widget is input widget.
-        disable: function () {
-
-        },
-
-        // mxui.widget._WidgetBase.resize is called when the page's layout is recalculated. Implement to do sizing calculations. Prefer using CSS instead.
-        resize: function (box) {
-
-        },
-
-        // mxui.widget._WidgetBase.uninitialize is called when the widget is destroyed. Implement to do special tear-down work.
-        uninitialize: function () {
-            // Clean up listeners, helper objects, etc. There is no need to remove listeners added with this.connect / this.subscribe / this.own.
         },
 
         _setupEvents: function () {
