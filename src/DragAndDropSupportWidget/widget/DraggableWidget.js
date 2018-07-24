@@ -43,15 +43,9 @@ require([
             this._setupEvents();
         },
 
-        // mxui.widget._WidgetBase.update is called when context is changed or initialized. Implement to re-render and / or fetch data.
-        update: function (obj, callback) {
-//            console.log(this.id + '.update');
-
-            this._contextObj = obj;
-            this._resetSubscriptions();
-            this._updateRendering();
-
+            if (callback) {
             callback();
+            }
         },
 
         _setupEvents: function () {
@@ -71,21 +65,7 @@ require([
                 "data-object-type" : this._contextObj && this._contextObj.getEntity() || "",
                 "data-object-guid" : this._contextObj && this._contextObj.getGuid() || ""
             });
-        },
-
-        _resetSubscriptions: function () {
-            // Release handle on previous object, if any.
-            if (this._handle) {
-                this.unsubscribe(this._handle);
-                this._handle = null;
             }
 
-            if (this._contextObj) {
-                this._handle = this.subscribe({
-                    guid: this._contextObj.getGuid(),
-                    callback: this._updateRendering
-                });
-            }
-        }
     });
 });

@@ -50,8 +50,6 @@ require( [
 //            console.log(this.id + '.update');
 
             this._contextObj = obj;
-            this._resetSubscriptions();
-            this._updateRendering();
 
             callback();
         },
@@ -207,22 +205,5 @@ require( [
                 this._dropData.draggable.css({top: "0px", left: "0px"});
             }
         },
-        _updateRendering: function () {
-        },
-
-        _resetSubscriptions: function () {
-            // Release handle on previous object, if any.
-            if (this._handle) {
-                this.unsubscribe(this._handle);
-                this._handle = null;
-            }
-
-            if (this._contextObj) {
-                this._handle = this.subscribe({
-                    guid: this._contextObj.getGuid(),
-                    callback: this._updateRendering
-                });
-            }
-        }
     });
 });
