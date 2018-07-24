@@ -45,13 +45,13 @@ require([
         },
 
         _setDataAttributes: function () {
-            var type =  this._contextObject && this._contextObject.getEntity() || "";
+            var type = this._contextObject && this._contextObject.getEntity() || "";
             var guid = this._contextObject && this._contextObject.getGuid() || "";
 
             $(this.domNode.parentElement).attr({
                 "data-object-type" : type,
                 "data-object-guid" : guid
-            });
+            }).draggable(this._contextObject ? "enable" : "disable");
         }
 
     });
