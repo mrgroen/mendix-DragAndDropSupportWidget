@@ -1,91 +1,58 @@
-/*jslint white:true, nomen: true, plusplus: true */
-/*global mx, define, require, browser, devel, console */
-/*mendix */
 /*
-    DraggableWidget
-    ========================
-
-    @file      : DraggableWidget.js
-    @version   : 1.0
     @author    : Marcel Groeneweg
-    @date      : 20-02-2017
     @copyright : ITvisors
     @license   : Apache 2
-
-    Documentation
-    ========================
-    Draggable widget
 */
 
-// Required module list. Remove unnecessary modules, you can always get them back from the boilerplate.
 require([
-    'dojo/_base/declare', 'mxui/widget/_WidgetBase',
-    'mxui/dom',
-    'DragAndDropSupportWidget/lib/jquery.ui.touch-punch'
-], function (declare, _WidgetBase, dom, $) {
-    'use strict';
+    "dojo/_base/declare", "mxui/widget/_WidgetBase",
+    "DragAndDropSupportWidget/lib/jquery.ui.touch-punch"
+], function (declare, _WidgetBase, $) {
+    "use strict";
 
-    // Declare widget's prototype.
-    return declare('DragAndDropSupportWidget.widget.DraggableWidget', [ _WidgetBase ], {
+    return declare("DragAndDropSupportWidget.widget.DraggableWidget", [ _WidgetBase ], {
 
-        // Parameters configured in the Modeler.
+        // Modeler parameters
+        draggableClass: "",
+        dragContainment: "",
+        makeClone: true,
 
-        // Internal variables. Non-primitives created in the prototype are shared between all widget instances.
-        _handle: null,
-        _contextObj: null,
+        // Internal variables
+        _contextObject: null,
 
-        // dijit._WidgetBase.postCreate is called after constructing the widget. Implement to do extra setup work.
         postCreate: function () {
-//            console.log(this.id + '.postCreate');
-
-//            this.domNode.appendChild(dom.create('span', { 'class': 'DraggableWidget-message' }, this.messageString));
-
             this._setupEvents();
         },
 
-        // mxui.widget._WidgetBase.update is called when context is changed or initialized. Implement to re-render and / or fetch data.
-        update: function (obj, callback) {
-//            console.log(this.id + '.update');
-
-            this._contextObj = obj;
-            this._resetSubscriptions();
-            this._updateRendering();
-
-            callback();
+       update: function (object, callback) {
+            this._contextObject = object;
+            this._setDataAttributes();
+            if (callback) {
+                callback();
+            }
         },
 
         _setupEvents: function () {
-            var args = {};
-            if (this.dragContainment) {
-                args.containment = this.dragContainment;
-            }
-            args.revert = "invalid";
-            if (this.makeClone) {
-                args.helper = "clone";
-            }
-            $(this.domNode.parentElement).addClass(this.draggableClass).draggable(args);
+            // http://api.jqueryui.com/draggable/
+            var options = {
+                containment: this.dragContainment || false,
+                revert: "invalid",
+                helper: this.makeClone ? "clone" : "original"
+            };
+            $(this.domNode.parentElement)
+                .addClass(this.draggableClass)
+                .draggable(options);
         },
 
-        _updateRendering: function () {
+        _setDataAttributes: function () {
+            var type = this._contextObject && this._contextObject.getEntity() || "";
+            var guid = this._contextObject && this._contextObject.getGuid() || "";
+
             $(this.domNode.parentElement).attr({
-                "data-object-type" : this._contextObj.getEntity(),
-                "data-object-guid" : this._contextObj.getGuid()
-            });
-        },
-
-        _resetSubscriptions: function () {
-            // Release handle on previous object, if any.
-            if (this._handle) {
-                this.unsubscribe(this._handle);
-                this._handle = null;
-            }
-
-            if (this._contextObj) {
-                this._handle = this.subscribe({
-                    guid: this._contextObj.getGuid(),
-                    callback: this._updateRendering
-                });
-            }
+                "data-object-type" : type,
+                "data-object-guid" : guid
+            }).draggable(this._contextObject ? "enable" : "disable");
         }
+
     });
 });
