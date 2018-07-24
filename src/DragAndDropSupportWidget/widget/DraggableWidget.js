@@ -6,7 +6,7 @@
     ========================
 
     @file      : DraggableWidget.js
-    @version   : 1.0
+    @version   : 1.1.1
     @author    : Marcel Groeneweg
     @date      : 20-02-2017
     @copyright : ITvisors
@@ -68,8 +68,8 @@ require([
 
         _updateRendering: function () {
             $(this.domNode.parentElement).attr({
-                "data-object-type" : this._contextObj.getEntity(),
-                "data-object-guid" : this._contextObj.getGuid()
+                "data-object-type" : this._contextObj && this._contextObj.getEntity() || "",
+                "data-object-guid" : this._contextObj && this._contextObj.getGuid() || ""
             });
         },
 
